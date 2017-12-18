@@ -1,4 +1,4 @@
 package com.codecool.enterprise.overcomplicated.model;
 
-public class TictactoeGame {
+public class TicTacToeGame {
 }

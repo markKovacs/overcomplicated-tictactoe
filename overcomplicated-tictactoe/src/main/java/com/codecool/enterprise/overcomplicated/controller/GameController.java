@@ -1,16 +1,26 @@
 package com.codecool.enterprise.overcomplicated.controller;
 
+import com.codecool.enterprise.overcomplicated.service.AvatarAPIService;
 import com.codecool.enterprise.overcomplicated.model.Player;
-import com.codecool.enterprise.overcomplicated.model.TictactoeGame;
+import com.codecool.enterprise.overcomplicated.model.TicTacToeGame;
+import com.codecool.enterprise.overcomplicated.service.ComicAPIService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Random;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
 @SessionAttributes({"player", "game", "avatar_uri"})
 public class GameController {
+
+    @Autowired
+    private AvatarAPIService avatarAPIService;
+
+    @Autowired
+    private ComicAPIService comicAPIService;
 
     @ModelAttribute("player")
     public Player getPlayer() {
@@ -18,19 +28,29 @@ public class GameController {
     }
 
     @ModelAttribute("game")
-    public TictactoeGame getGame() {
-        return new TictactoeGame();
+    public TicTacToeGame getGame() {
+        return new TicTacToeGame();
     }
 
     @ModelAttribute("avatar_uri")
-    public String getAvatarUri() {
-        Random rnd = new Random();
-        return "https://api.adorable.io/avatars/285/" + rnd.nextInt(999);
+    public String getAvatarURI() {
+        return avatarAPIService.getAvatarURI();
+    }
+
+    @ModelAttribute
+    public void refreshAvatarAttribute(Model model) {
+        if (model.asMap().get("avatar_uri").equals("/images/default_avatar.png")) {
+            model.addAttribute("avatar_uri", avatarAPIService.getAvatarURI());
+        }
+    }
+
+    @ModelAttribute("comic_uri")
+    public String getComicURI() {
+        return comicAPIService.getComicURI();
     }
 
     @GetMapping(value = "/")
-    public String welcomeView(@ModelAttribute Player player, Model model) {
-        model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
+    public String welcomeView(@ModelAttribute Player player) {
         return "welcome";
     }
 
@@ -42,7 +62,6 @@ public class GameController {
     @GetMapping(value = "/game")
     public String gameView(@ModelAttribute("player") Player player, Model model) {
         model.addAttribute("funfact", "&quot;Chuck Norris knows the last digit of pi.&quot;");
-        model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
         return "game";
     }
 
