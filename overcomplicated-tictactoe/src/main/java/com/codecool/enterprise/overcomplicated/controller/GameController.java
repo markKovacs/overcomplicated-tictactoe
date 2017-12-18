@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Random;
+
 @Controller
-@SessionAttributes({"player", "game"})
+@SessionAttributes({"player", "game", "avatar_uri"})
 public class GameController {
 
     @ModelAttribute("player")
@@ -22,11 +24,13 @@ public class GameController {
 
     @ModelAttribute("avatar_uri")
     public String getAvatarUri() {
-        return "https://robohash.org/codecool";
+        Random rnd = new Random();
+        return "https://api.adorable.io/avatars/285/" + rnd.nextInt(999);
     }
 
     @GetMapping(value = "/")
-    public String welcomeView(@ModelAttribute Player player) {
+    public String welcomeView(@ModelAttribute Player player, Model model) {
+        model.addAttribute("comic_uri", "https://imgs.xkcd.com/comics/bad_code.png");
         return "welcome";
     }
 

@@ -24,6 +24,27 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!-- Spring boot test framework -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Layout Dialect for Thymeleaf -->
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+        </dependency>
+
+        <!-- Used to avoid Strict HTML parsing -->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>1.9.21</version>
+        </dependency>
+
     </dependencies>
 
     <build>
