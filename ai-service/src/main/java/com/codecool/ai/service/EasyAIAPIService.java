@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-public class DumbAIAPIService implements AiService {
+public class EasyAIAPIService implements AiService {
 
     @Override
     public Integer getRecommendation(String board, String player) {

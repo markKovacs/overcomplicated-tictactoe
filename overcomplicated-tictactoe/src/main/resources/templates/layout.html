@@ -20,41 +20,6 @@
 
     <div class="container">
 
-        <!-- HEADER: PLAYER NAME, AVATAR, CHANGE NAME BUTTON -->
-        <header class="media">
-            <div class="media-body">
-                <h1 class="media-heading">The coolest TicTacToe in the World</h1>
-                <p>OK, just a bit overcomplicated...</p>
-            </div>
-            <div class="media-right">
-                <span class="media-heading" th:text="${game.playerOne.userName}"></span>
-                <img class="media-object" th:src="${game.playerOne.avatarURI}" alt="avatar"/>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeNameModal">
-                    Change name
-                </button>
-            </div>
-        </header>
-
-        <!-- CHANGE NAME MODAL -->
-        <div class="modal fade" id="changeNameModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Change your name here:</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form action="#" th:action="@{/changeplayeronename}" method="post">
-                            <div class="form-group">
-                                <label for="newname">Your new name:</label>
-                                <input type="text" name="userName" id="newname" class="form-control input-sm"/>
-                            </div>
-                            <input type="submit" value="Change" class="btn btn-default"/>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- CHILD TEMPLATE CONTENT -->
         <th:block layout:fragment="content"></th:block>
 

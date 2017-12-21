@@ -5,9 +5,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class AvatarAPIService implements AvatarService {
+public class AvatarAPIService {
 
-    @Override
     public String getAvatarURI() {
         final String URI = "http://localhost:9000/api/avatars/random";
         RestTemplate restTemplate = new RestTemplate();

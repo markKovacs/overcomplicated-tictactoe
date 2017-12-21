@@ -5,9 +5,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class FunFactAPIService implements FunFactService {
+public class FunFactAPIService {
 
-    @Override
     public String getFunFact() {
         final String URI = "http://localhost:9040/api/funfacts/random";
         RestTemplate restTemplate = new RestTemplate();

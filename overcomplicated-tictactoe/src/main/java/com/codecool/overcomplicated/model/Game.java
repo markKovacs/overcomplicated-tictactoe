@@ -9,14 +9,18 @@ public class Game {
     private Player currentPlayer;
     private Player playerOne;
     private Player playerTwo;
-    private String playerMode;
+    private String gameMode;
 
-    public Game(String playerMode) {
+    public Game() {
+        this.gameMode = "";
+    }
+
+    public Game(String gameMode) {
         this.board = new ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
             board.add(null);
         }
-        this.playerMode = playerMode;
+        this.gameMode = gameMode;
     }
 
     public Move changeCell(int cellNumber) {
@@ -53,12 +57,12 @@ public class Game {
         this.currentPlayer = currentPlayer;
     }
 
-    public String getPlayerMode() {
-        return playerMode;
+    public String getGameMode() {
+        return gameMode;
     }
 
-    public void setPlayerMode(String playerMode) {
-        this.playerMode = playerMode;
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
     }
 
     public Player getPlayerOne() {
@@ -94,10 +98,6 @@ public class Game {
         }
 
         return sb.toString();
-    }
-
-    public boolean isTwoPlayerMode() {
-        return this.playerMode.equals("two");
     }
 
     public Player checkWinner() {

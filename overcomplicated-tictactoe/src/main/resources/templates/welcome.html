@@ -14,8 +14,10 @@
 
         <div class="row">
             <div class="col-xs-9">
-                <h2>Welcome <span th:text="${game.playerOne.userName}">Guest</span>!</h2>
-                <a href="/game" class="btn btn-default">Start a new game!</a>
+                <h2>Welcome on the Overcomplicated TicTacToe Page! Choose game mode.</h2>
+                <a href="/game?reqMode=easy" class="btn btn-default">Single Player - Easy</a>
+                <a href="/game?reqMode=hard" class="btn btn-default">Single Player - Hard</a>
+                <a href="/game?reqMode=multi" class="btn btn-default">Multi Player</a>
             </div>
         </div>
 

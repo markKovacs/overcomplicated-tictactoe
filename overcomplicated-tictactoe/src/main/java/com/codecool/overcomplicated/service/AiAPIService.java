@@ -6,11 +6,10 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class DumbAIAPIService implements AiService {
+public class AiAPIService {
 
-    @Override
-    public Integer getMove(Game game) {
-        final String URI = "http://localhost:9060/api/ai/" + game.toAPIString();
+    public Integer getMove(Game game, String difficulty) {
+        final String URI = "http://localhost:9060/api/ai/" + difficulty + "/" + game.toAPIString();
         RestTemplate restTemplate = new RestTemplate();
         Integer result;
         try {

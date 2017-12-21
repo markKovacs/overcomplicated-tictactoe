@@ -23,13 +23,17 @@ public class GameController {
     private FunFactAPIService funFactAPIService;
 
     @ModelAttribute("game")
-    public Game getGame() {
+    public Game getDefaultGame() {
+        return new Game();
+    }
+
+    private Game getGame(String mode) {
         Player playerOne = Player.createPlayerOne(avatarAPIService.getAvatarURI());
-        Game game = new Game("one");
+        Game game = new Game(mode);
         game.setPlayerOne(playerOne);
         game.setCurrentPlayer(playerOne);
 
-        if (game.isTwoPlayerMode()) {
+        if (mode.equals("multi")) {
             game.setPlayerTwo(Player.createPlayerTwo(avatarAPIService.getAvatarURI()));
         } else {
             game.setPlayerTwo(Player.createAiPlayer());
@@ -43,34 +47,39 @@ public class GameController {
         return comicsAPIService.getComicURI();
     }
 
-    @GetMapping(value = "/")
-    public String welcomeView(SessionStatus sessionStatus, @SessionAttribute("game") Game game) {
-        sessionStatus.setComplete();
-        return "welcome";
-    }
+    @PostMapping(value = "/change-name/{player}")
+    public String changePlayerName(@RequestParam("userName") String userName,
+                                   @ModelAttribute("game") Game game,
+                                   @PathVariable("player") String player) {
 
-    @PostMapping(value = "/changeplayeronename")
-    public String changePlayerOneName(@RequestParam("userName") String userName, @ModelAttribute("game") Game game) {
-        game.getPlayerOne().setUserName(userName);
-        return "redirect:/game";
-    }
-
-    @PostMapping(value = "/changeplayertwoname")
-    public String changePlayerTwoName(@RequestParam("userName") String userName, @ModelAttribute("game") Game game) {
-        game.getPlayerTwo().setUserName(userName);
-        return "redirect:/game";
+        switch (player) {
+            case "one": game.getPlayerOne().setUserName(userName); break;
+            case "two": game.getPlayerTwo().setUserName(userName); break;
+        }
+        return "redirect:/game?reqMode=" + game.getGameMode();
     }
 
     @GetMapping(value = "/game")
-    public String gameView(Model model) {
+    public String gameView(Model model, @RequestParam("reqMode") String reqMode, @ModelAttribute("game") Game game) {
+
+        String currMode = game.getGameMode();
+
+        if (reqMode.equals("easy") && !currMode.equals("easy")) {
+            model.addAttribute("game", getGame("easy"));
+        } else if (reqMode.equals("hard") && !currMode.equals("hard")) {
+            model.addAttribute("game", getGame("hard"));
+        } else if (reqMode.equals("multi") && !currMode.equals("multi")) {
+            model.addAttribute("game", getGame("multi"));
+        }
+
         model.addAttribute("funfact", funFactAPIService.getFunFact());
         return "game";
     }
 
-    @GetMapping(value = "/new-game")
-    public String newGame(SessionStatus sessionStatus) {
+    @GetMapping(value = "/")
+    public String welcomeView(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        return "redirect:/";
+        return "welcome";
     }
 
 }

@@ -3,7 +3,7 @@ package com.codecool.overcomplicated.api;
 import com.codecool.overcomplicated.model.Game;
 import com.codecool.overcomplicated.model.Move;
 import com.codecool.overcomplicated.model.Player;
-import com.codecool.overcomplicated.service.AiService;
+import com.codecool.overcomplicated.service.AiAPIService;
 import com.codecool.overcomplicated.utils.GameDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class GameRestApi {
 
     @Autowired
-    private AiService dumbAIAPIService;
+    private AiAPIService aiAPIService;
 
     @PostMapping(value = "/api/change-board")
     public GameDto gameMove(@RequestParam("cellNumber") int moveOfPlayer,
@@ -24,13 +24,17 @@ public class GameRestApi {
 
         Move move = game.changeCell(moveOfPlayer);
         if (move != null) {
-            if (game.getPlayerMode().equals("one")) {
-                // single player, valid move
-                Integer moveOfAI = dumbAIAPIService.getMove(game);
-                if (moveOfAI != null) {
-                    game.changeCell(moveOfAI);
-                    aiMove = new Move(moveOfAI, "X");
-                }
+            Integer moveOfAI = null;
+            if (game.getGameMode().equals("easy")) {
+                System.out.println("Easy computer making move.");
+                moveOfAI = aiAPIService.getMove(game, "easy");
+            } else if (game.getGameMode().equals("hard")) {
+                System.out.println("Hard computer making move.");
+                moveOfAI = aiAPIService.getMove(game, "hard");
+            }
+            if (moveOfAI != null) {
+                game.changeCell(moveOfAI);
+                aiMove = new Move(moveOfAI, "X");
             }
             playerMove = move;
         }

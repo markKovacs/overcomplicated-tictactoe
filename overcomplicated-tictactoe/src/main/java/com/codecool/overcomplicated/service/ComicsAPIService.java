@@ -5,9 +5,8 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class ComicsAPIService implements ComicsService {
+public class ComicsAPIService {
 
-    @Override
     public String getComicURI() {
         final String URI = "http://localhost:9020/api/comics/random";
         RestTemplate restTemplate = new RestTemplate();

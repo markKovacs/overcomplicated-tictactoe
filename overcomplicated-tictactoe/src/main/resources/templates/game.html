@@ -5,89 +5,178 @@
 
 <head>
     <title>Game</title>
+
+    <script th:inline="javascript" type="application/javascript">
+        /*<![CDATA[*/
+        var currentPlayer = [[${game.currentPlayer}]];
+        /*]]>*/
+    </script>
+
 </head>
 
 <body>
 
-
-
     <!-- PAGE CONTENT -->
     <th:block layout:fragment="content">
 
+        <!-- HEADER: PLAYER NAME, AVATAR, CHANGE NAME BUTTON -->
+        <header class="media">
+            <div class="media-body">
+                <h1 class="media-heading">The coolest TicTacToe in the World</h1>
+                <p>OK, just a bit overcomplicated...</p>
+            </div>
+                <div id="player-one" class="media-right">
+                    <span class="media-heading" th:text="${game.playerOne.userName}"></span>
+                    <img class="media-object" th:src="${game.playerOne.avatarURI}" alt="avatar"/>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeNameOneModal">
+                        Change Name
+                    </button>
+                </div>
+                <div id="player-two" th:if="${game.playerTwo.avatarURI != null}" class="media-right">
+                    <span class="media-heading" th:text="${game.playerTwo.userName}"></span>
+                    <img class="media-object" th:src="${game.playerTwo.avatarURI}" alt="avatar"/>
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#changeNameTwoModal">
+                        Change Name
+                    </button>
+                </div>
+        </header>
+
+        <!-- CHANGE NAME MODALS -->
+        <div class="modal fade" id="changeNameOneModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change your name here:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/change-name/one}" method="post">
+                            <div class="form-group">
+                                <label for="newname">Your new name:</label>
+                                <input th:value="${game.playerOne.userName}" type="text" name="userName" id="newname" class="form-control input-sm"/>
+                            </div>
+                            <input type="submit" value="Change" class="btn btn-default"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="changeNameTwoModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change your name here:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="#" th:action="@{/change-name/two}" method="post">
+                            <div class="form-group">
+                                <label for="newname">Your new name:</label>
+                                <input th:value="${game.playerTwo.userName}" type="text" name="userName" id="newname" class="form-control input-sm"/>
+                            </div>
+                            <input type="submit" value="Change" class="btn btn-default"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME OVER MODAL -->
+        <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Game Over</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="gameovermsg"></p>
+                        <a class="btn btn-default" th:href="@{/}" href="#">Back to Index</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GAME BOARD -->
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                 <div id="board" class="container-fluid game-container">
+                    <!-- MULTI PLAYER MESSAGE - TURN -->
+                    <div th:if="${game.playerTwo.avatarURI != null}" class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            <p id="turn">Current turn: <span id="turn-sign"></span></p>
+                        </div>
+                    </div>
+                    <!-- CELL ROWS -->
                     <div class="row">
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(0)}">
-                                <a th:case="null" id="cell-0" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-0" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-0" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-0" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-0" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-0" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(1)}">
-                                <a th:case="null" id="cell-1" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-1" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-1" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-1" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-1" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(2)}">
-                                <a th:case="null" id="cell-2" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-2" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-2" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-2" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-2" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(3)}">
-                                <a th:case="null" id="cell-3" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-3" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-3" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-3" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-3" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-3" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(4)}">
-                                <a th:case="null" id="cell-4" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-4" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-4" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-4" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-4" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-4" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(5)}">
-                                <a th:case="null" id="cell-5" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-5" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-5" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-5" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-5" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-5" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(6)}">
-                                <a th:case="null" id="cell-6" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-6" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-6" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-6" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-6" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-6" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(7)}">
-                                <a th:case="null" id="cell-7" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-7" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-7" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-7" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-7" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-7" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                         <div class="col-xs-4">
                             <th:block th:switch="${game.getCell(8)}">
-                                <a th:case="null" id="cell-8" class="btn btn-default square">&nbsp;</a>
-                                <a th:case="'O'" id="cell-8" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
-                                <a th:case="'X'" id="cell-8" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                <a th:case="null" id="cell-8" class="btn btn-default square cell">&nbsp;</a>
+                                <a th:case="'O'" id="cell-8" class="btn btn-default square cell"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-8" class="btn btn-default square cell"><i class="fa fa-times" aria-hidden="true"></i></a>
                             </th:block>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- FUN FACT -->
             <div class="col-xs-12 col-sm-3">
                 <div class="text-right">
                     <p class="lead funfact" th:utext="${funfact}"></p>
