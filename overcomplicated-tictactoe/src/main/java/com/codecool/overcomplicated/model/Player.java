@@ -18,11 +18,11 @@ public class Player {
     }
 
     public static Player createPlayerOne(String uri) {
-        return new Player("AnonymousOne", "O", uri);
+        return new Player("PlayerOne", "O", uri);
     }
 
     public static Player createPlayerTwo(String uri) {
-        return new Player("AnonymousTwo", "X", uri);
+        return new Player("PlayerTwo", "X", uri);
     }
 
     public static Player createAiPlayer() {

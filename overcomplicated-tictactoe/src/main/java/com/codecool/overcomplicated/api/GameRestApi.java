@@ -15,6 +15,11 @@ public class GameRestApi {
     @Autowired
     private AiAPIService aiAPIService;
 
+    @ModelAttribute("game")
+    public Game getDefaultGame() {
+        return new Game();
+    }
+
     @PostMapping(value = "/api/change-board")
     public GameDto gameMove(@RequestParam("cellNumber") int moveOfPlayer,
                             @ModelAttribute("game") Game game) {
@@ -26,10 +31,8 @@ public class GameRestApi {
         if (move != null) {
             Integer moveOfAI = null;
             if (game.getGameMode().equals("easy")) {
-                System.out.println("Easy computer making move.");
                 moveOfAI = aiAPIService.getMove(game, "easy");
             } else if (game.getGameMode().equals("hard")) {
-                System.out.println("Hard computer making move.");
                 moveOfAI = aiAPIService.getMove(game, "hard");
             }
             if (moveOfAI != null) {

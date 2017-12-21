@@ -106,7 +106,7 @@ public class Game {
         // Check rows
         for (int i = 0; i < 7; i = i + 3) {
             try {
-                if (board.get(i).equals(board.get(i+1)) && board.get(i+1).equals(board.get(i+2))) {
+                if (board.get(i).equals(board.get(i + 1)) && board.get(i + 1).equals(board.get(i + 2))) {
                     winnerSign = board.get(i);
                 }
             } catch (NullPointerException e) {
@@ -115,7 +115,7 @@ public class Game {
         // Check columns
         for (int i = 0; i < 3; i++) {
             try {
-                if (board.get(i).equals(board.get(i+3)) && board.get(i+3).equals(board.get(i+6))) {
+                if (board.get(i).equals(board.get(i + 3)) && board.get(i + 3).equals(board.get(i + 6))) {
                     winnerSign = board.get(i);
                 }
             } catch (NullPointerException e) {
