@@ -1,4 +1,4 @@
-package com.codecool.enterprise.overcomplicated;
+package com.codecool.overcomplicated;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TicTacToeApp {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TicTacToeApp.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TicTacToeApp.class, args);
+    }
+
 }

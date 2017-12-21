@@ -9,43 +9,81 @@
 
 <body>
 
+
+
     <!-- PAGE CONTENT -->
     <th:block layout:fragment="content">
 
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                <div class="container-fluid game-container">
+                <div id="board" class="container-fluid game-container">
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=0" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(0)}">
+                                <a th:case="null" id="cell-0" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-0" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-0" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                            <th:block th:switch="${game.getCell(1)}">
+                                <a th:case="null" id="cell-1" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-1" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-1" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            <th:block th:switch="${game.getCell(2)}">
+                                <a th:case="null" id="cell-2" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-2" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-2" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=3" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(3)}">
+                                <a th:case="null" id="cell-3" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-3" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-3" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=4" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(4)}">
+                                <a th:case="null" id="cell-4" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-4" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-4" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=5" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(5)}">
+                                <a th:case="null" id="cell-5" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-5" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-5" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-4">
-                            <a href="/game-move?move=6" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(6)}">
+                                <a th:case="null" id="cell-6" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-6" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-6" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=7" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(7)}">
+                                <a th:case="null" id="cell-7" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-7" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-7" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                         <div class="col-xs-4">
-                            <a href="/game-move?move=8" class="btn btn-default square">&nbsp;</a>
+                            <th:block th:switch="${game.getCell(8)}">
+                                <a th:case="null" id="cell-8" class="btn btn-default square">&nbsp;</a>
+                                <a th:case="'O'" id="cell-8" class="btn btn-default square"><i class="fa fa-circle-o" aria-hidden="true"></i></a>
+                                <a th:case="'X'" id="cell-8" class="btn btn-default square"><i class="fa fa-times" aria-hidden="true"></i></a>
+                            </th:block>
                         </div>
                     </div>
                 </div>

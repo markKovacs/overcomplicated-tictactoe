@@ -1,4 +1,4 @@
-package com.codecool.enterprise.overcomplicated;
+package com.codecool.overcomplicated;
 
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.context.annotation.Bean;

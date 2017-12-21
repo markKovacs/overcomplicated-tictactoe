@@ -43,3 +43,11 @@ footer {
 footer img {
     filter: invert(100%) contrast(0.45);
 }
+
+.fa-times {
+    color: lightcoral;
+}
+
+.fa-circle-o {
+    color:lightskyblue;
+}
