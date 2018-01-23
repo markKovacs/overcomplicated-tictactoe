@@ -41,20 +41,16 @@ app.logic = {
             case "X": playerCell.html(`<i class="fa fa-times" aria-hidden="true"></i>`); break;
         }
 
-        var turnMsg;
         var turnSignEl = $("#turn-sign");
         if (response.playerMove.sign === "O") {
-            turnMsg = "Current turn: ";
             turnSignEl.addClass("red");
             turnSignEl.removeClass("blue");
             turnSignEl.text("X");
         } else {
-            turnMsg = "Current turn: ";
             turnSignEl.addClass("blue");
             turnSignEl.removeClass("red");
             turnSignEl.text("O");
         }
-        //$("#turn").text(turnMsg);
 
         if (response.aiMove !== null) {
             var aiCell = $("#cell-" + response.aiMove.cellNumber);

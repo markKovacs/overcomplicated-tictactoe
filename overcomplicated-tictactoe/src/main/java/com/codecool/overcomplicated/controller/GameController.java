@@ -63,16 +63,20 @@ public class GameController {
     public String gameView(Model model, @RequestParam("reqMode") String reqMode, @ModelAttribute("game") Game game) {
 
         String currMode = game.getGameMode();
+        String gameMode = null;
 
+        // Compares requested and currently selected game modes
         if (reqMode.equals("easy") && !currMode.equals("easy")) {
-            model.addAttribute("game", getGame("easy"));
+            gameMode = "easy";
         } else if (reqMode.equals("hard") && !currMode.equals("hard")) {
-            model.addAttribute("game", getGame("hard"));
+            gameMode = "hard";
         } else if (reqMode.equals("multi") && !currMode.equals("multi")) {
-            model.addAttribute("game", getGame("multi"));
+            gameMode = "multi";
         }
 
+        model.addAttribute("game", getGame(gameMode));
         model.addAttribute("funfact", funFactAPIService.getFunFact());
+
         return "game";
     }
 

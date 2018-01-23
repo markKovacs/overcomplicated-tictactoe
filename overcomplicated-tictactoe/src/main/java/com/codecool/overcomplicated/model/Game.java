@@ -24,6 +24,8 @@ public class Game {
     }
 
     public Move changeCell(int cellNumber) {
+
+        // Validate cellNumber input from client
         if (cellNumber > 8 || cellNumber < 0 || board.get(cellNumber) != null) {
             return null;
         }

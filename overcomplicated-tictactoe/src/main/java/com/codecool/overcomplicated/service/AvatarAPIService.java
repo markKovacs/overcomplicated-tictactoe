@@ -8,15 +8,18 @@ import org.springframework.web.client.RestTemplate;
 public class AvatarAPIService {
 
     public String getAvatarURI() {
+
         final String URI = "http://localhost:9000/api/avatars/random";
         RestTemplate restTemplate = new RestTemplate();
         String result;
+
         try {
             result = restTemplate.getForObject(URI, String.class);
         } catch (RestClientException e) {
             System.out.println(e.getMessage());
             result = "/images/default_avatar.png";
         }
+
         return result;
     }
 

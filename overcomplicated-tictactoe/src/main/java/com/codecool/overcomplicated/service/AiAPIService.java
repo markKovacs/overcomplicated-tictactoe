@@ -9,15 +9,19 @@ import org.springframework.web.client.RestTemplate;
 public class AiAPIService {
 
     public Integer getMove(Game game, String difficulty) {
-        final String URI = "http://localhost:9060/api/ai/" + difficulty + "/" + game.toAPIString();
+
+        final String URI = String.format("http://localhost:9060/api/ai/%s/%s", difficulty, game.toAPIString());
+
         RestTemplate restTemplate = new RestTemplate();
         Integer result;
+
         try {
             result = restTemplate.getForObject(URI, Integer.class);
         } catch (RestClientException e) {
             System.out.println(e.getMessage());
             result = null;
         }
+
         return result;
     }
 

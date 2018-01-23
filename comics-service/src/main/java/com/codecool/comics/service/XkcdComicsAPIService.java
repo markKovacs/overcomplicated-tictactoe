@@ -13,11 +13,13 @@ public class XkcdComicsAPIService implements ComicsService {
 
     @Override
     public String getRandomComicsString() {
+
         Random rnd = new Random();
         final String URI = "https://xkcd.com/" + (1001 + rnd.nextInt(928)) + "/info.0.json";
 
         RestTemplate restTemplate = new RestTemplate();
         String result;
+
         try {
             result = restTemplate.getForObject(URI, String.class);
         } catch (RestClientException e) {

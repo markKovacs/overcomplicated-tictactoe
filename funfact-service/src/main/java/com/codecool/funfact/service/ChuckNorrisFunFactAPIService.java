@@ -5,7 +5,6 @@ import com.google.gson.JsonParser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -15,14 +14,13 @@ public class ChuckNorrisFunFactAPIService implements FunFactService {
 
     @Override
     public String getRandomFunFact() {
-        final String URI = "https://api.chucknorris.io/jokes/random";
 
+        final String URI = "https://api.chucknorris.io/jokes/random";
         String response;
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
         try {
             response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
