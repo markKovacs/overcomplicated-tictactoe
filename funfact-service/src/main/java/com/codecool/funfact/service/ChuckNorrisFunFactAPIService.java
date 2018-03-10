@@ -25,7 +25,7 @@ public class ChuckNorrisFunFactAPIService implements FunFactService {
         try {
             response = restTemplate.exchange(URI, HttpMethod.GET, entity, String.class).getBody();
         } catch (RestClientException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             return "&quot;Chuck Norris knows the last digit of pi.&quot;";
         }
 

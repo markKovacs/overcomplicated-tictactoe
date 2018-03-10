@@ -1,7 +1,4 @@
-package com.codecool.overcomplicated.utils;
-
-import com.codecool.overcomplicated.model.Move;
-import com.codecool.overcomplicated.model.Player;
+package com.codecool.overcomplicated.model;
 
 public class GameDto {
     private Move playerMove;

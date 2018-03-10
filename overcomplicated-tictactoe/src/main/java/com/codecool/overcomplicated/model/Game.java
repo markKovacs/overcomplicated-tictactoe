@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Game {
 
-    private List<String> board;
+    private List<String> board = new ArrayList<>(9);
     private Player currentPlayer;
     private Player playerOne;
     private Player playerTwo;
@@ -16,7 +16,6 @@ public class Game {
     }
 
     public Game(String gameMode) {
-        this.board = new ArrayList<>(9);
         for (int i = 0; i < 9; i++) {
             board.add(null);
         }
@@ -37,50 +36,6 @@ public class Game {
 
         System.out.println(this);
         return move;
-    }
-
-    public String getCell(int index) {
-        return this.board.get(index);
-    }
-
-    public List<String> getBoard() {
-        return board;
-    }
-
-    public void setBoard(List<String> board) {
-        this.board = board;
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public void setGameMode(String gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public Player getPlayerOne() {
-        return playerOne;
-    }
-
-    public void setPlayerOne(Player playerOne) {
-        this.playerOne = playerOne;
-    }
-
-    public Player getPlayerTwo() {
-        return playerTwo;
-    }
-
-    public void setPlayerTwo(Player playerTwo) {
-        this.playerTwo = playerTwo;
     }
 
     @Override
@@ -164,6 +119,50 @@ public class Game {
 
         sb.append("/").append(currentPlayer.getSign());
         return sb.toString();
+    }
+
+    public String getCell(int index) {
+        return this.board.get(index);
+    }
+
+    public List<String> getBoard() {
+        return board;
+    }
+
+    public void setBoard(List<String> board) {
+        this.board = board;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public void setPlayerOne(Player playerOne) {
+        this.playerOne = playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public void setPlayerTwo(Player playerTwo) {
+        this.playerTwo = playerTwo;
     }
 
 }

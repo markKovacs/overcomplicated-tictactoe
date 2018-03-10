@@ -16,7 +16,7 @@ public class FunFactAPIService {
         try {
             result = restTemplate.getForObject(URI, String.class);
         } catch (RestClientException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             result = "&quot;Chuck Norris knows the last digit of pi.&quot;";
         }
 

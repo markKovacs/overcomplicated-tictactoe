@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout">
+
+<head>
+    <title>Error</title>
+</head>
+
+<body>
+
+<!-- PAGE CONTENT -->
+<th:block layout:fragment="content">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>Error Occurred</h2>
+            <p th:text="${msg}">An error message.</p>
+            <a href="/" class="btn btn-default">Back to Index</a>
+        </div>
+    </div>
+
+</th:block>
+
+</body>
+
+</html>
